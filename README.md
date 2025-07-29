@@ -64,6 +64,8 @@ cd laser-level-webcam
 
 Next, create a virtual environment for isolating the program's dependencies. Run the following commands:
 
+This project seems to work well with Python 3.10. Install that on your computer.
+
 2a. if you are missing virtualenv, install it with pip
 ```sh
 pip install virtualenv
@@ -75,7 +77,14 @@ pip install virtualenv
 ```sh
 virtualenv venv
 ```
+Or setup a virtualenv for a specific installed version of Python:
+```sh
+py -3.10 -m venv venv3_10
+```
+
 2c. Setup the virtualenv with support for linuxcnc
+
+THIS WILL MAKE THE VENV VERSION MATCH THE CURRENT/ACTIVE PYTHON VERSION SOMEHOW. Might need to use pyenv (for Windows) or something like that.
 ```sh
 virtualenv --system-site-packages venv
 ```
@@ -107,9 +116,8 @@ This command uses `pip` to install the packages specified in the requirements.tx
 After installing the required packages, you are ready to run the Python program:
 
 ```sh
-python.exe laser_level_tool/main.py
+python.exe .\laser-level-webcam.py
 ```
-We run the `main.py` file in the `laser_level_tool` directory
 
 ## Usage
 
