@@ -10,24 +10,24 @@ Start future sessions by reading this file and `README.md`.
 
 - Recommended local Python is 3.11. The README notes Python 3.12 is not compatible with the pinned PySide6 version. Packaging metadata says `>=3.7`, and `tox.ini` lists py37-py311, but the current dependency pins are the practical source of truth.
 - Runtime dependencies are pinned in `requirements.txt`; test/dev tools are in `requirements-dev.txt`.
-- Install for local development:
+- This repo should have a local virtual environment at `.venv/`. Prefer calling `.venv\Scripts\python.exe` directly for all Python commands instead of relying on activation, `python`, or `py` resolving correctly globally.
+- Create or refresh the local environment with Python 3.11:
 
 ```powershell
-py -3.11 -m venv venv
-.\venv\Scripts\activate
-python -m pip install -r requirements.txt -r requirements-dev.txt
+py -V:3.11 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt -r requirements-dev.txt
 ```
 
 - Run the main measurement GUI from source with:
 
 ```powershell
-python .\laser-level-webcam.py
+.\.venv\Scripts\python.exe .\laser-level-webcam.py
 ```
 
 - Run the LinuxCNC remote driver GUI with:
 
 ```powershell
-python .\linuxcnc_remote.py
+.\.venv\Scripts\python.exe .\linuxcnc_remote.py
 ```
 
 - After package installation, the console script is:
@@ -56,13 +56,13 @@ Supporting areas:
 - Run tests with:
 
 ```powershell
-python -m pytest tests
+.\.venv\Scripts\python.exe -m pytest tests
 ```
 
 - The test suite includes pure utility/curve tests and pytest-qt smoke tests for widgets and the main window. Qt tests may need a working graphical environment and installed PySide6 dependencies.
 - `tox.ini` is configured for py37, py38, py39, py310, and py311, with `pytest {posargs:tests}`. `tox` itself is not listed in `requirements-dev.txt`.
 - Code quality tooling is configured through `.pre-commit-config.yaml`: trailing whitespace, EOF fixer, YAML check, large-file check, Black line length 120, strict mypy with ignored missing imports, flake8 line length 120, reorder-python-imports, and setup-cfg-fmt.
-- Helper scripts in `testing/` shell out via `os.system()`. Check their working-directory assumptions before relying on them; direct `python -m pytest tests` and `pre-commit run --all-files` are clearer.
+- Helper scripts in `testing/` shell out via `os.system()`. Check their working-directory assumptions before relying on them; direct `.\.venv\Scripts\python.exe -m pytest tests` and `pre-commit run --all-files` are clearer.
 
 ## Development Notes
 
