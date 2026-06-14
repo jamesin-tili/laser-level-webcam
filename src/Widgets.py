@@ -25,6 +25,8 @@ from src.DataClasses import Sample
 from src.utils import get_units
 from src.utils import units_of_measurements
 
+import gc
+
 
 style = {
     "axes.grid": "True",
@@ -156,6 +158,10 @@ class Graph(QWidget):  # type: ignore
 
         self.ax.legend()
         self.canvas.draw()
+
+        #cleanup variables and garbage collect
+        del x,y
+        gc.collect()
 
 
 class PixmapWidget(QWidget):  # type: ignore
